@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -178,7 +179,11 @@ public class MenuRestaurantListView extends AppCompatActivity {
             objHttpClient.execute(objHttpPost);
 
             Toast.makeText(MenuRestaurantListView.this, "Update Success", Toast.LENGTH_LONG).show();
+
+
+
         } catch (Exception e) {
+            Log.d("jl", "mySQL ==> " + e.toString());
             Toast.makeText(MenuRestaurantListView.this, "Cannot Update Order", Toast.LENGTH_LONG).show();
         }
 
