@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
 
 public class MenuRestaurantListView extends AppCompatActivity {
 
@@ -145,9 +156,33 @@ public class MenuRestaurantListView extends AppCompatActivity {
 
     }   //confirmOrder
 
+    //update Order to mySQL
     private void updateOrder() {
 
-    }
+        try {
+
+            //Can Connected http://
+            StrictMode.ThreadPolicy objThreadPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(objThreadPolicy);
+
+            ArrayList<NameValuePair> objNameValuePairs = new ArrayList<NameValuePair>();
+            objNameValuePairs.add(new BasicNameValuePair("isAdd", "true"));
+            objNameValuePairs.add(new BasicNameValuePair("Officer", officerString));
+            objNameValuePairs.add(new BasicNameValuePair("Desk", deskString));
+            objNameValuePairs.add(new BasicNameValuePair("Food", foodString));
+            objNameValuePairs.add(new BasicNameValuePair("Item", itemString));
+
+            HttpClient objHttpClient = new DefaultHttpClient();
+            HttpPost objHttpPost = new HttpPost("http://swiftcodingthai.com/jl/php_add_data_restaurant.php");
+            objHttpPost.setEntity(new UrlEncodedFormEntity(objNameValuePairs, "UTF-8"));
+            objHttpClient.execute(objHttpPost);
+
+            Toast.makeText(MenuRestaurantListView.this, "Update Success", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(MenuRestaurantListView.this, "Cannot Update Order", Toast.LENGTH_LONG).show();
+        }
+
+    }   //updateOrder
 
     private void createSpinner() {
 
