@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="my_desk">
+
+        <item>1A</item>
+        <item>2A</item>
+        <item>3A</item>
+        <item>4A</item>
+        <item>1B</item>
+        <item>2B</item>
+        <item>3B</item>
+        <item>4B</item>
+        <item>1C</item>
+        <item>2C</item>
+        <item>3C</item>
+        <item>4C</item>
+
+    </string-array>
+
+</resources>
