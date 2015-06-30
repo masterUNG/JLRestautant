@@ -34,14 +34,14 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
+            android:id="@+id/edtUser"
             android:hint="User :"
             android:inputType="text" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText2"
+            android:id="@+id/edtPassword"
             android:hint="Password :"
             android:inputType="textPassword" />
     </LinearLayout>
@@ -49,6 +49,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="clickLogin"
         android:text="Login"
         android:id="@+id/button"
         android:layout_alignParentBottom="true" />
