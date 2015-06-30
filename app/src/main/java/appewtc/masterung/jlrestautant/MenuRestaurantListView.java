@@ -118,6 +118,35 @@ public class MenuRestaurantListView extends AppCompatActivity {
 
     private void confirmOrder() {
 
+        AlertDialog.Builder objBuilder = new AlertDialog.Builder(this);
+        objBuilder.setIcon(R.drawable.restaurant);
+        objBuilder.setTitle("Confirm Order");
+        objBuilder.setMessage("Officer = " + officerString + "\n"
+                + "Desk = " + deskString + "\n"
+                + "Food = " + foodString + "\n"
+                + "Item = " + itemString);
+        objBuilder.setCancelable(false);
+        objBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        objBuilder.setPositiveButton("Order", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                updateOrder();
+                dialogInterface.dismiss();
+
+            }
+        });
+        objBuilder.show();
+
+    }   //confirmOrder
+
+    private void updateOrder() {
+
     }
 
     private void createSpinner() {
