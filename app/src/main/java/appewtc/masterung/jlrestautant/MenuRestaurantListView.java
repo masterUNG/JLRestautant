@@ -1,5 +1,7 @@
 package appewtc.masterung.jlrestautant;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,7 +45,7 @@ public class MenuRestaurantListView extends AppCompatActivity {
     private void createListView() {
 
         objFoodTABLE = new FoodTABLE(this);
-        String strFood[] = objFoodTABLE.readAllFood();
+        final String strFood[] = objFoodTABLE.readAllFood();
         String strPrice[] = objFoodTABLE.readAllPrice();
         int intFoodImage[] = {R.drawable.food1, R.drawable.food2, R.drawable.food3,
                 R.drawable.food4, R.drawable.food5, R.drawable.food6, R.drawable.food7,
@@ -61,7 +63,62 @@ public class MenuRestaurantListView extends AppCompatActivity {
         MyAdapter objMyAdapter = new MyAdapter(MenuRestaurantListView.this, strFood, strPrice, intFoodImage);
         foodListView.setAdapter(objMyAdapter);
 
+        //Active Click
+        foodListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                foodString = strFood[i];
+
+                //Choose Item
+                chooseItem();
+
+            } // event
+        });
+
+
+
     }   //createListView
+
+    private void chooseItem() {
+
+        CharSequence[] objCharSequences = {"1 Set", "2 Set", "3 Set", "4 Set", "5 Set"};
+        AlertDialog.Builder objBuilder = new AlertDialog.Builder(this);
+        objBuilder.setTitle("ทานกี่ที่ ดีคะ ?");
+        objBuilder.setSingleChoiceItems(objCharSequences, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                switch (i) {
+                    case 0:
+                        itemString = "1";
+                        break;
+                    case 1:
+                        itemString = "2";
+                        break;
+                    case 2:
+                        itemString = "3";
+                        break;
+                    case 3:
+                        itemString = "4";
+                        break;
+                    case 4:
+                        itemString = "5";
+                        break;
+                } //switch
+
+                confirmOrder();
+                dialogInterface.dismiss();
+
+            }   // event
+        });
+        objBuilder.show();
+
+    }   //chooseItem
+
+    private void confirmOrder() {
+
+    }
 
     private void createSpinner() {
 
